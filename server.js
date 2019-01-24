@@ -28,4 +28,8 @@ app.put('/user/updateRateing', user_ctl.updateRateing);
 app.put('/user/updateUser', user_ctl.updateUser);
 app.delete('/user/deleteUser', user_ctl.deleteUser);
 app.delete('/user/deleteRating', user_ctl.deleteRating);
+app.all('/api',(req,res)=>{
+	res.redirect('https://documenter.getpostman.com/view/5712621/RzthPVrV');
+	return;
+})
 app.listen(port, () => console.log(`listening on port ${port}`));
