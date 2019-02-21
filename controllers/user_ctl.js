@@ -7,7 +7,7 @@ function getNextNumberId(){
 }
 exports.getUserById = async (req, res,next) => {
     const {userId=null}=req.params
-    await users.find({id :324420933})
+    await users.find({id :userId})
         .then(docs => {
         console.log(docs);
         return res.json(docs);

@@ -5,7 +5,8 @@ const schema   	= {
 	 numOfUserRated: { type:Number,required:true },
 	 avgRating: { type:Number },
 	 userList: [Number],
-	 numOfSeasons:{ type: Number },						
+	 status:{type:String},	
+	 img_url:{type:String},					
 	 id: { type:Number,required:true },
 }
 const show_schema = new mongoose.Schema(schema)

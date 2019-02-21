@@ -1,8 +1,11 @@
 const Shows = require('../models/show'); // access the MODEL
-exports.getAllShow =  (req, res,next) => {
-     Shows.find({})
-        .then(docs => {
-        console.log(docs);
+var unirest = require('unirest');
+const fetch = require('node-fetch')
+exports.getAllShow =  async(req, res,next) => {
+    var Show;
+     await Shows.find({})
+     .then(async(docs) => {
+      
         return res.json(docs);
         
     })
@@ -45,3 +48,28 @@ exports.createRate=async (userRate,userId)=>{
     await Shows.updateOne(quer,upda)
      return;
 };
+
+
+// for(var i=1;i<=587;++i){
+//     fetch(`https://www.episodate.com/api/most-popular?page=${i}`)
+//     .then(response => response.json())
+//     .then((response)=>{
+//         response.tv_shows.map(show=>{
+//             Show=new Shows({
+//                 name: show.name,
+//                 startDate: show.start_date,
+//                 numOfUserRated: 0,
+//                 avgRating: 0,
+//                 status:show.status,
+//                 userList: [],	
+//                 img_url:show.image_thumbnail_path,					
+//                 id: show.id
+//             })
+//             Show.save(
+//                 (err)=>{
+//                     console.log(`err with page number: ${i}`)
+//                 }
+//             )
+//         })
+//     })
+// }
