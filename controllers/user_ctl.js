@@ -1,6 +1,6 @@
 
 const users = require('../models/user'); // access the MODEL
-const show_ctl = require('./show_ctl');
+const show_Ctl = require('./show_ctl');
 var num=0;
 function getNextNumberId(){
     return num++
@@ -26,8 +26,8 @@ exports.createRating=async (req,res,next)=>{
     const quer={ "id": parseInt(userId)},
           upda= { $push:{"rateList":userRate}};
     await users.updateOne(quer,upda)
-    show_ctl.createRate(userRate,userId)
-    res.json("update was set")
+    show_Ctl.createRate(userRate,userId)
+    res.json("The rate was created")
     
 };
 exports.createUser=async (req,res,next)=>{
@@ -46,7 +46,7 @@ exports.createUser=async (req,res,next)=>{
             }
         }
     )
-    res.json("update was set")
+    res.json("new user is been created")
     
 };
 
@@ -54,27 +54,27 @@ exports.updateRateing=async (req,res,next)=>{
     const condition={$and:[{"id": req.body.id},{"rateList":{$elemMatch :{"showId":req.body.showId}}}] },
           doc= { $set:{"rateList":{"rateScore":req.body.rateScore,"rateText":req.body.rateText,"showId":req.body.showId}}};
     await users.updateOne(condition,doc)
-    res.json("update was set")
+    res.json("update rating was been set")
     
 };
 exports.updateUser=async (req,res,next)=>{
     const condition={"id":req.body.id},
           doc= {$set: {'name': req.body.name}};
     await users.updateOne(condition,doc)
-    res.json("update was set")
+    res.json("user is been update")
     
 };
 
 exports.deleteUser=async (req,res,next)=>{      //get only id
     await users.deleteOne({"id":req.body.id})
-    res.json("update was set")
+    res.json(`user ${req.body.id} was been deleted`)
     
 };
 exports.deleteRating=async (req,res,next)=>{//get showId and id(of the user)
     const condition={"id":req.body.id}
           doc= {$pull: {'rateList':{"showId":req.body.showId }}};
     await users.updateOne(condition,doc)
-    res.json("update was set")
+    res.json("rating is been daleted")
     
 };
 
